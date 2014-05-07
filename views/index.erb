@@ -1,0 +1,54 @@
+<h1>Calculadora usando Jison</h1>
+
+<script type="text/javascript" src="/calculator.js"></script>
+<script type="text/javascript" src="/main.js"></script>
+
+<div id="content">
+  <p class="loadfile">
+     <div>
+	<label class = "Selboton">
+ 	  Examinar ...
+	  <input type="file" id="examples" />
+	</label>
+    </div>
+  </p>
+  <p>
+  <nav>
+  <ul>
+    <% programs.sort.each do |p, index| %>
+	<!--Por cada programa ejecutar--> 
+        <li><a href="<%= user %><%= p.name %>" class="<%=current?(user + p.name) %>" > <%= p.name %> </a></li>
+    <% end %>
+  </ul>
+  </nav>
+  <table>
+    <tr>
+      <td>
+        <form action="/save" method="post">
+          <textarea id="input" name="input" 
+                    autofocus cols = "40" rows = "4">
+<%= source %>
+          </textarea>
+          <br/>
+          <label for="saveas">Save as</label>
+          <input id="saveas" type="text" name="fname" 
+                 title="Un identificador (que no sea la palabra 'test')"
+                 pattern="^(?!test$)\w+$"
+          />
+        </form>
+      </td>
+      <td><button class="parseboton" id="parse" type="button">parse</button></td>
+    </tr>
+  </table>
+  </p>
+  <p>
+    <div id="flash"><%= flash[:notice] if flash[:notice]%></div>
+  </p>
+  <div class="output"><!-- Output goes here! --> 
+<pre>
+<span id="output">
+</span>
+</pre>
+  </div>
+</div>
+
